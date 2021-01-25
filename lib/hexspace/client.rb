@@ -47,7 +47,7 @@ module Hexspace
 
     def execute(statement, timeout: nil)
       result = execute_statement(statement, timeout: timeout)
-      process_result(result)
+      process_result(result) if result.operationHandle.hasResultSet
     end
 
     # private

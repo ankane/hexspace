@@ -16,7 +16,7 @@ class ClientTest < Minitest::Test
   end
 
   def test_current_database
-    assert_equal "hexspace_test", client.execute("SELECT current_database()").first["current_database()"]
+    assert_equal "hexspace_test", client.execute("SELECT current_database() AS value").first["value"]
   end
 
   def test_timeout
