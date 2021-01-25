@@ -32,6 +32,9 @@ class TypesTest < Minitest::Test
 
   def test_float
     assert_type 1.5, "SELECT CAST(1.5 AS float)"
+    assert_type Float::INFINITY, "SELECT float('Infinity')"
+    assert_type -Float::INFINITY, "SELECT float('-Infinity')"
+    assert_type Float::NAN, "SELECT float('NaN')"
   end
 
   def test_boolean
@@ -48,7 +51,11 @@ class TypesTest < Minitest::Test
 
   def assert_type(expected, expression)
     result = client.execute("#{expression} AS value").first["value"]
-    assert_equal expected, result
+    if expected.is_a?(Float) && expected.nan?
+      assert result.nan?
+    else
+      assert_equal expected, result
+    end
     assert_equal expected.class, result.class
   end
 end
