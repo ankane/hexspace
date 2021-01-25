@@ -45,6 +45,7 @@ class TypesTest < Minitest::Test
     assert_type Date.today, "SELECT current_date()"
   end
 
+  # TODO use Time
   def test_timestamp
     assert_kind_of String, client.execute("SELECT now() AS value").first["value"]
   end
