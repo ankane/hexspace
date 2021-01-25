@@ -56,6 +56,7 @@ jobs:
           hexspace_mode: sasl
           beeline: -u jdbc:hive2://localhost:10000
     env:
+      HADOOP_HEAPSIZE: 2048
       HADOOP_VERSION: 3.2.2
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
       HIVE_VERSION: 3.1.2
@@ -81,7 +82,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: ~/hive
-        key: hive-${{ env.HIVE_VERSION }}
+        key: hive-${{ env.HIVE_VERSION }}-hadoop-${{ env.HADOOP_VERSION }}
       id: cache-hive
     - name: Download Hive
       if: steps.cache-hive.outputs.cache-hit != 'true'
@@ -90,8 +91,7 @@ jobs:
         tar xzf apache-hive-$HIVE_VERSION-bin.tar.gz
         mv apache-hive-$HIVE_VERSION-bin ~/hive
 
-    # same fix as Homebrew
-    - run: |
+        # same fix as Homebrew
         rm ~/hive/lib/guava-19.0.jar
         ln -s ~/hadoop/share/hadoop/common/lib/guava-27.0-jre.jar ~/hive/lib
 

@@ -4,9 +4,6 @@ class ClientTest < Minitest::Test
   def test_table
     client.execute("DROP TABLE IF EXISTS users")
     client.execute("CREATE TABLE users (id INT, name STRING)")
-
-    skip "Need to debug" if ENV["HIVE_VERSION"]
-
     client.execute("INSERT INTO users VALUES (1, 'Test 1'), (2, 'Test 2'), (3, 'Test 3')")
     expected = 1.upto(3).map { |i| {"id" => i, "name" => "Test #{i}"} }
     assert_equal expected, client.execute("SELECT * FROM users ORDER BY id")

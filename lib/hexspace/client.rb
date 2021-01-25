@@ -36,9 +36,12 @@ module Hexspace
       @client = TCLIService::Client.new(protocol)
 
       req = TOpenSessionReq.new
-      if database
-        req.configuration = {"use:database" => database}
-      end
+      configuration = {
+        # remove table prefix with Hive
+        "set:hiveconf:hive.resultset.use.unique.column.names" => "false"
+      }
+      configuration["use:database"] = database if database
+      req.configuration = configuration
       @session = @client.OpenSession(req)
       check_status @session
 
