@@ -1,4 +1,4 @@
-## 0.1.1 (unreleased)
+## 0.1.1 (2021-01-25)
 
 - Improved typecasting
 - Removed table prefix with Hive
