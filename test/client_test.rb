@@ -1,11 +1,6 @@
 require_relative "test_helper"
 
 class ClientTest < Minitest::Test
-  def test_execute
-    result = client.execute("SELECT 'world' AS hello, 1 AS num, NULL AS missing")
-    assert_equal [{"hello" => "world", "num" => 1, "missing" => nil}], result
-  end
-
   def test_table
     client.execute("DROP TABLE IF EXISTS users")
     client.execute("CREATE TABLE users (id INT, name STRING)")
@@ -22,6 +17,30 @@ class ClientTest < Minitest::Test
 
   def test_current_database
     assert_equal "hexspace_test", client.execute("SELECT current_database()").first["current_database()"]
+  end
+
+  def test_string
+    assert_equal "world", client.execute("SELECT 'world' AS value").first["value"]
+  end
+
+  def test_integer
+    assert_equal 1, client.execute("SELECT 1 AS value").first["value"]
+  end
+
+  def test_decimal
+    assert_equal 1.5, client.execute("SELECT 1.5 AS value").first["value"]
+  end
+
+  def test_float
+    assert_equal 1.5, client.execute("SELECT CAST(1.5 AS float) AS value").first["value"]
+  end
+
+  def test_boolean
+    assert_equal true, client.execute("SELECT true AS value").first["value"]
+  end
+
+  def test_timestamp
+    assert_kind_of Time, client.execute("SELECT now()").first["now()"]
   end
 
   def test_timeout

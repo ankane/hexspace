@@ -87,6 +87,7 @@ module Hexspace
 
       rows = []
       columns = metadata.schema.columns.map(&:columnName)
+      types = metadata.schema.columns.map { |c| TYPE_NAMES[c.typeDesc.types.first.primitiveEntry.type].downcase }
 
       loop do
         req = TFetchResultsReq.new
@@ -111,9 +112,25 @@ module Hexspace
 
           offset = start_offset
           nulls = value.nulls.unpack1("b*")
-          value.values.each do |v|
-            rows[offset][name] = nulls[offset] == "1" ? nil : v
-            offset += 1
+          values = value.values
+
+          case types[j]
+          when "timestamp"
+            values.each do |v|
+              # TODO use server time zone
+              rows[offset][name] = nulls[offset] == "1" ? nil : Time.parse(v)
+              offset += 1
+            end
+          when "decimal"
+            values.each do |v|
+              rows[offset][name] = nulls[offset] == "1" ? nil : BigDecimal(v)
+              offset += 1
+            end
+          else
+            values.each do |v|
+              rows[offset][name] = nulls[offset] == "1" ? nil : v
+              offset += 1
+            end
           end
         end
 

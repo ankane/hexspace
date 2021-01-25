@@ -1,6 +1,10 @@
 # dependencies
 require "thrift"
 
+# stdlib
+require "bigdecimal"
+require "time"
+
 # thrift
 require "hexspace/tcli_service_constants"
 require "hexspace/tcli_service_types"
