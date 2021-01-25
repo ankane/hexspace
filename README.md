@@ -23,7 +23,7 @@ client = Hexspace::Client.new
 Execute queries
 
 ```ruby
-client.execute("SELECT 'world' AS hello")
+client.execute("SELECT COUNT(*) FROM users")
 ```
 
 ## Connection Options
