@@ -20,9 +20,9 @@ jobs:
     - name: Download Spark
       if: steps.cache-spark.outputs.cache-hit != 'true'
       run: |
-        wget https://www.apache.org/dyn/closer.lua?path=spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
+        wget -q https://apache.osuosl.org/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
         tar xzf spark-$SPARK_VERSION-bin-hadoop3.2.tgz
         mv spark-$SPARK_VERSION-bin-hadoop3.2 ~/spark
-    - run: ~/spark/sbin/start-thriftserver.sh
+    - run: ~/spark/sbin/start-thriftserver.sh && sleep 20 && cat /home/runner/spark/logs/*.out
     - run: ~/spark/bin/beeline -u jdbc:hive2://localhost:10000 -e 'CREATE DATABASE hexspace_test;'
     - run: bundle exec rake test
