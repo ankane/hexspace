@@ -19,41 +19,10 @@ class ClientTest < Minitest::Test
     assert_equal "hexspace_test", client.execute("SELECT current_database()").first["current_database()"]
   end
 
-  def test_string
-    assert_equal "world", client.execute("SELECT 'world' AS value").first["value"]
-  end
-
-  def test_integer
-    assert_equal 1, client.execute("SELECT 1 AS value").first["value"]
-  end
-
-  def test_decimal
-    assert_equal 1.5, client.execute("SELECT 1.5 AS value").first["value"]
-  end
-
-  def test_float
-    assert_equal 1.5, client.execute("SELECT CAST(1.5 AS float) AS value").first["value"]
-  end
-
-  def test_boolean
-    assert_equal true, client.execute("SELECT true AS value").first["value"]
-  end
-
-  def test_timestamp
-    assert_kind_of Time, client.execute("SELECT now()").first["now()"]
-  end
-
   def test_timeout
     error = assert_raises(Thrift::TransportException) do
       Hexspace::Client.new(host: "10.255.255.1", timeout: 0.1)
     end
     assert_equal "Could not connect to 10.255.255.1:10000: ", error.message
-  end
-
-  def client
-    @client ||= Hexspace::Client.new(
-      mode: (ENV["HEXSPACE_MODE"] || :sasl).to_sym,
-      database: "hexspace_test"
-    )
   end
 end
