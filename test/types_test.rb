@@ -43,7 +43,7 @@ class TypesTest < Minitest::Test
   end
 
   def test_timestamp
-    assert_kind_of Time, client.execute("SELECT now() AS value").first["value"]
+    assert_kind_of String, client.execute("SELECT now() AS value").first["value"]
   end
 
   def assert_type(expected, expression)

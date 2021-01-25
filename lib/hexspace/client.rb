@@ -115,12 +115,12 @@ module Hexspace
           values = value.values
 
           case types[j]
-          when "timestamp"
-            values.each do |v|
-              # TODO use server time zone
-              rows[offset][name] = nulls[offset] == "1" ? nil : Time.parse(v)
-              offset += 1
-            end
+          # TODO decide how to handle time zones
+          # when "timestamp"
+          #   values.each do |v|
+          #     rows[offset][name] = nulls[offset] == "1" ? nil : Time.parse(v)
+          #     offset += 1
+          #   end
           when "date"
             values.each do |v|
               rows[offset][name] = nulls[offset] == "1" ? nil : Date.parse(v)
