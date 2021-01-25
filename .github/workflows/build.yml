@@ -4,13 +4,29 @@ jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - ruby: 3.0
+          hexspace_mode: sasl
+          beeline: -u jdbc:hive2://localhost:10000
+        - ruby: 2.7
+          hexspace_mode: nosasl
+          hiveconf: --hiveconf hive.server2.authentication=NOSASL
+          beeline: -u "jdbc:hive2://localhost:10000/;auth=noSasl" -n anonymous
+        - ruby: 2.6
+          hexspace_mode: http
+          hiveconf: --hiveconf hive.server2.transport.mode=http
+          beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
     env:
       SPARK_VERSION: 3.0.1
+      HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0
+        ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - uses: actions/cache@v2
       with:
@@ -23,6 +39,6 @@ jobs:
         wget -q https://apache.osuosl.org/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
         tar xzf spark-$SPARK_VERSION-bin-hadoop3.2.tgz
         mv spark-$SPARK_VERSION-bin-hadoop3.2 ~/spark
-    - run: ~/spark/sbin/start-thriftserver.sh && sleep 20 && cat /home/runner/spark/logs/*.out
-    - run: ~/spark/bin/beeline -u jdbc:hive2://localhost:10000 -e 'CREATE DATABASE hexspace_test;'
+    - run: ~/spark/sbin/start-thriftserver.sh ${{ matrix.hiveconf }} && sleep 20
+    - run: ~/spark/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
     - run: bundle exec rake test
