@@ -47,7 +47,7 @@ class TypesTest < Minitest::Test
 
   # TODO use Time
   def test_timestamp
-    assert_kind_of String, client.execute("SELECT now() AS value").first["value"]
+    assert_kind_of String, client.execute("SELECT current_timestamp() AS value").first["value"]
   end
 
   # TODO typecast
@@ -57,7 +57,7 @@ class TypesTest < Minitest::Test
 
   # TODO typecast
   def test_map
-    assert_type '{1.0:"2",3.0:"4"}', "SELECT map(1.0, '2', 3.0, '4')"
+    assert_type '{1.5:"2",3.5:"4"}', "SELECT map(1.5, '2', 3.5, '4')"
   end
 
   def assert_type(expected, expression)
