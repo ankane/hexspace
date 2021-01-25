@@ -121,6 +121,11 @@ module Hexspace
               rows[offset][name] = nulls[offset] == "1" ? nil : Time.parse(v)
               offset += 1
             end
+          when "date"
+            values.each do |v|
+              rows[offset][name] = nulls[offset] == "1" ? nil : Date.parse(v)
+              offset += 1
+            end
           when "decimal"
             values.each do |v|
               rows[offset][name] = nulls[offset] == "1" ? nil : BigDecimal(v)
