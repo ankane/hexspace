@@ -1,0 +1,28 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    env:
+      SPARK_VERSION: 3.0.1
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - uses: actions/cache@v2
+      with:
+        path: ~/spark
+        key: spark-${{ env.SPARK_VERSION }}
+      id: cache-spark
+    - name: Download Spark
+      if: steps.cache-spark.outputs.cache-hit != 'true'
+      run: |
+        wget https://www.apache.org/dyn/closer.lua?path=spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
+        tar xzf spark-$SPARK_VERSION-bin-hadoop3.2.tgz
+        mv spark-$SPARK_VERSION-bin-hadoop3.2 ~/spark
+    - run: ~/spark/sbin/start-thriftserver.sh
+    - run: ~/spark/bin/beeline -u jdbc:hive2://localhost:10000 -e 'CREATE DATABASE hexspace_test;'
+    - run: bundle exec rake test
