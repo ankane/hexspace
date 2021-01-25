@@ -48,6 +48,9 @@ module Hexspace
       ObjectSpace.define_finalizer(self, self.class.finalize(@transport, @client, @session))
     end
 
+    # TODO add new method that returns Result object
+    # so its possible to get duplicate columns
+    # as well as columns when there are no rows
     def execute(statement, timeout: nil)
       result = execute_statement(statement, timeout: timeout)
       process_result(result) if result.operationHandle.hasResultSet
