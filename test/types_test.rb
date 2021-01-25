@@ -23,7 +23,7 @@ class TypesTest < Minitest::Test
   end
 
   def test_decimal
-    assert_type 1.5, "SELECT 1.5"
+    assert_type BigDecimal("1.5"), "SELECT 1.5"
   end
 
   def test_double
@@ -47,6 +47,8 @@ class TypesTest < Minitest::Test
   end
 
   def assert_type(expected, expression)
-    assert_equal expected, client.execute("#{expression} AS value").first["value"]
+    result = client.execute("#{expression} AS value").first["value"]
+    assert_equal expected, result
+    assert_equal expected.class, result.class
   end
 end
