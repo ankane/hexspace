@@ -55,6 +55,11 @@ class TypesTest < Minitest::Test
     assert_type "[1,2,3]", "SELECT array(1, 2, 3)"
   end
 
+  # TODO typecast
+  def test_map
+    assert_type '{1.0:"2",3.0:"4"}', "SELECT map(1.0, '2', 3.0, '4')"
+  end
+
   def assert_type(expected, expression)
     result = client.execute("#{expression} AS value").first["value"]
     if expected.is_a?(Float) && expected.nan?

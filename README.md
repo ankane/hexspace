@@ -96,3 +96,9 @@ beeline -u jdbc:hive2://localhost:10000 -e 'CREATE DATABASE hexspace_test;'
 # run the tests
 bundle exec rake test
 ```
+
+Resources
+
+- [Spark SQL Reference](https://spark.apache.org/docs/latest/sql-ref.html)
+- [Hive Language Manual](https://cwiki.apache.org/confluence/display/Hive/LanguageManual)
+- [Thrift SASL Spec](https://github.com/apache/thrift/blob/master/doc/specs/thrift-sasl-spec.txt)
