@@ -1,49 +1,6 @@
 name: build
 on: [push, pull_request]
 jobs:
-  spark:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-        - ruby: 3.0
-          hexspace_mode: sasl
-          beeline: -u jdbc:hive2://localhost:10000
-        - ruby: 2.7
-          hexspace_mode: nosasl
-          hiveconf: --hiveconf hive.server2.authentication=NOSASL
-          beeline: -u "jdbc:hive2://localhost:10000/;auth=noSasl" -n anonymous
-        - ruby: 2.6
-          hexspace_mode: http
-          hiveconf: --hiveconf hive.server2.transport.mode=http
-          beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
-    env:
-      HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
-      SPARK_VERSION: 3.1.2
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-
-    - uses: actions/cache@v2
-      with:
-        path: ~/spark
-        key: spark-${{ env.SPARK_VERSION }}
-      id: cache-spark
-    - name: Download Spark
-      if: steps.cache-spark.outputs.cache-hit != 'true'
-      run: |
-        wget -q https://apache.osuosl.org/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
-        tar xzf spark-$SPARK_VERSION-bin-hadoop3.2.tgz
-        mv spark-$SPARK_VERSION-bin-hadoop3.2 ~/spark
-
-    - run: ~/spark/sbin/start-thriftserver.sh ${{ matrix.hiveconf }} && sleep 20
-    - run: ~/spark/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
-    - run: bundle exec rake test
-
   hive:
     runs-on: ubuntu-latest
     strategy:
@@ -99,5 +56,5 @@ jobs:
         mkdir /tmp/warehouse
         ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse --hiveconf hive.root.logger=INFO,console ${{ matrix.hiveconf }} &
         sleep 120
-    # - run: ~/hive/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
-    # - run: bundle exec rake test
+    - run: ~/hive/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
+    - run: bundle exec rake test
