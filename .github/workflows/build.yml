@@ -21,7 +21,7 @@ jobs:
           beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
     env:
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
-      SPARK_VERSION: 3.0.1
+      SPARK_VERSION: 3.1.2
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
