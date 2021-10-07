@@ -2,7 +2,6 @@ name: build
 on: [push, pull_request]
 jobs:
   spark:
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -46,7 +45,6 @@ jobs:
     - run: bundle exec rake test
 
   hive:
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -57,7 +55,7 @@ jobs:
           beeline: -u jdbc:hive2://localhost:10000
     env:
       HADOOP_HEAPSIZE: 2048
-      HADOOP_VERSION: 3.2.2
+      HADOOP_VERSION: 3.3.1
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
       HIVE_VERSION: 3.1.2
     steps:
@@ -100,6 +98,6 @@ jobs:
     - run: |
         mkdir /tmp/warehouse
         ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse --hiveconf hive.root.logger=INFO,console ${{ matrix.hiveconf }} &
-        sleep 120
+        sleep 180
     - run: ~/hive/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
     - run: bundle exec rake test
