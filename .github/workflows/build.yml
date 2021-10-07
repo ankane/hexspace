@@ -11,7 +11,7 @@ jobs:
           hexspace_mode: sasl
           beeline: -u jdbc:hive2://localhost:10000
     env:
-      HADOOP_HEAPSIZE: 2048
+      HADOOP_HEAPSIZE: 1024
       HADOOP_VERSION: 3.3.1
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
       HIVE_VERSION: 3.1.2
