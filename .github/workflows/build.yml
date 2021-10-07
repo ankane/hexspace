@@ -54,7 +54,7 @@ jobs:
     - run: ~/hive/bin/schematool -dbType derby -initSchema
     - run: |
         mkdir /tmp/warehouse
-        ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse --hiveconf hive.root.logger=INFO,console ${{ matrix.hiveconf }} &
-        sleep 300
+        ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse --hiveconf hive.root.logger=DEBUG,console ${{ matrix.hiveconf }} &
+        sleep 120
     - run: ~/hive/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
     - run: bundle exec rake test
