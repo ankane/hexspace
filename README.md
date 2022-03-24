@@ -9,7 +9,7 @@ Ruby client for Apache Spark SQL and Apache Hive
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'hexspace'
+gem "hexspace"
 ```
 
 ## Getting Started
