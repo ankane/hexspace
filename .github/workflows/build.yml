@@ -7,7 +7,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - ruby: 3.0
+        - ruby: 3.1
           hexspace_mode: sasl
           beeline: -u jdbc:hive2://localhost:10000
         - ruby: 2.7
@@ -20,7 +20,7 @@ jobs:
           beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
     env:
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
-      SPARK_VERSION: 3.1.2
+      SPARK_VERSION: 3.2.1
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
