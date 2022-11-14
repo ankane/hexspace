@@ -65,7 +65,7 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
 
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: ~/hadoop
         key: hadoop-${{ env.HADOOP_VERSION }}
