@@ -105,7 +105,8 @@ module Hexspace
         new_rows = 0
         start_offset = result.results.startRowOffset
 
-        result.results.columns.each_with_index do |col, j|
+        # columns can be nil with Spark 3.4+
+        result.results.columns&.each_with_index do |col, j|
           name = columns[j]
           value = col.get_value
 
