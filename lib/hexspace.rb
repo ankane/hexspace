@@ -6,14 +6,14 @@ require "bigdecimal"
 require "time"
 
 # thrift
-require "hexspace/tcli_service_constants"
-require "hexspace/tcli_service_types"
-require "hexspace/tcli_service"
+require_relative "hexspace/tcli_service_constants"
+require_relative "hexspace/tcli_service_types"
+require_relative "hexspace/tcli_service"
 
 # modules
-require "hexspace/client"
-require "hexspace/sasl_transport"
-require "hexspace/version"
+require_relative "hexspace/client"
+require_relative "hexspace/sasl_transport"
+require_relative "hexspace/version"
 
 module Hexspace
   class Error < StandardError; end
