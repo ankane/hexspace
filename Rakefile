@@ -13,7 +13,7 @@ task :generate do
   require "tmpdir"
 
   Dir.chdir(Dir.mktmpdir) do
-    system "thrift", "-r", "--gen", "rb", File.expand_path("thrift/TCLIService.thrift", __dir__)
+    system "thrift", "-r", "--gen", "rb", File.expand_path("thrift/TCLIService.thrift", __dir__), exception: true
 
     Dir["gen-rb/*"].each do |file|
       dest = File.expand_path("lib/hexspace/#{File.basename(file)}", __dir__).sub("t_c_l_i", "tcli")
