@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2023-05-07)
 
 - Fixed error with Spark 3.4.0
 - Dropped support for Ruby < 3
