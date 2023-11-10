@@ -2,7 +2,7 @@ module Hexspace
   class Client
     attr_reader :client, :transport, :session
 
-    def initialize(host: "localhost", port: nil, username: nil, password: nil, database: nil, mode: :sasl, timeout: nil)
+    def initialize(host: "localhost", port: nil, username: nil, password: nil, database: nil, mode: :sasl, timeout: nil, include_columns: nil)
       # could use current user in the future (like beeline)
       username ||= "anonymous"
       password ||= "anonymous"
@@ -34,6 +34,7 @@ module Hexspace
 
       protocol = Thrift::BinaryProtocol.new(@transport)
       @client = TCLIService::Client.new(protocol)
+      @include_columns = include_columns
 
       req = TOpenSessionReq.new
       configuration = {
@@ -85,6 +86,19 @@ module Hexspace
       result
     end
 
+    def column_names(metadata)
+      metadata.schema.columns.map(&:columnName)
+    end
+
+    TYPE_CONVERTERS = {
+      'date' => Date.method(:parse),
+      'decimal' => Kernel.method(:BigDecimal),
+      #'timestamp' => Time.method(:parse),
+    }.freeze
+    def type_converter(type)
+      TYPE_CONVERTERS[type]
+    end
+
     def process_result(stmt)
       req = TGetResultSetMetadataReq.new
       req.operationHandle = stmt.operationHandle
@@ -92,7 +106,7 @@ module Hexspace
       check_status metadata
 
       rows = []
-      columns = metadata.schema.columns.map(&:columnName)
+      columns = column_names(metadata)
       types = metadata.schema.columns.map { |c| TYPE_NAMES[c.typeDesc.types.first.primitiveEntry.type].downcase }
 
       loop do
@@ -120,22 +134,9 @@ module Hexspace
           offset = start_offset
           nulls = value.nulls.unpack1("b*")
           values = value.values
-
-          case types[j]
-          # TODO decide how to handle time zones
-          # when "timestamp"
-          #   values.each do |v|
-          #     rows[offset][name] = nulls[offset] == "1" ? nil : Time.parse(v)
-          #     offset += 1
-          #   end
-          when "date"
+          if converter = type_converter(types[j])
             values.each do |v|
-              rows[offset][name] = nulls[offset] == "1" ? nil : Date.parse(v)
-              offset += 1
-            end
-          when "decimal"
-            values.each do |v|
-              rows[offset][name] = nulls[offset] == "1" ? nil : BigDecimal(v)
+              rows[offset][name] = nulls[offset] == "1" ? nil : converter.call(v)
               offset += 1
             end
           else
@@ -153,7 +154,11 @@ module Hexspace
       req.operationHandle = stmt.operationHandle
       check_status client.CloseOperation(req)
 
-      rows
+      if @include_columns
+        [rows, columns]
+      else
+        rows
+      end
     end
   end
 end

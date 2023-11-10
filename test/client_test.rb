@@ -18,6 +18,18 @@ class ClientTest < Minitest::Test
     assert client.execute("SHOW TABLES")
   end
 
+  def test_include_columns
+    client = Hexspace::Client.new(
+      mode: (ENV["HEXSPACE_MODE"] || :sasl).to_sym,
+      database: "hexspace_test",
+      include_columns: true
+    )
+    client.execute("CREATE TABLE users (id INT, name STRING)")
+    rows, columns = client.execute("SELECT * FROM users")
+    assert_empty rows
+    assert_equal ["id", "name"], columns
+  end
+
   def test_current_database
     assert_equal "hexspace_test", client.execute("SELECT current_database() AS value").first["value"]
   end
