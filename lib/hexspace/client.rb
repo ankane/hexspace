@@ -48,12 +48,12 @@ module Hexspace
       ObjectSpace.define_finalizer(self, self.class.finalize(@transport, @client, @session))
     end
 
-    # TODO add new method that returns Result object
-    # so its possible to get duplicate columns
-    # as well as columns when there are no rows
-    def execute(statement, timeout: nil)
+    def execute(statement, timeout: nil, result_object: false)
       result = execute_statement(statement, timeout: timeout)
-      process_result(result) if result.operationHandle.hasResultSet
+      if result.operationHandle.hasResultSet
+        result = process_result(result)
+        result_object ? result : result.to_a
+      end
     end
 
     # private
@@ -113,7 +113,7 @@ module Hexspace
           if j == 0
             new_rows = value.values.size
             new_rows.times do
-              rows << {}
+              rows << []
             end
           end
 
@@ -130,17 +130,17 @@ module Hexspace
           #   end
           when "date"
             values.each do |v|
-              rows[offset][name] = nulls[offset] == "1" ? nil : Date.parse(v)
+              rows[offset][j] = nulls[offset] == "1" ? nil : Date.parse(v)
               offset += 1
             end
           when "decimal"
             values.each do |v|
-              rows[offset][name] = nulls[offset] == "1" ? nil : BigDecimal(v)
+              rows[offset][j] = nulls[offset] == "1" ? nil : BigDecimal(v)
               offset += 1
             end
           else
             values.each do |v|
-              rows[offset][name] = nulls[offset] == "1" ? nil : v
+              rows[offset][j] = nulls[offset] == "1" ? nil : v
               offset += 1
             end
           end
@@ -153,7 +153,7 @@ module Hexspace
       req.operationHandle = stmt.operationHandle
       check_status client.CloseOperation(req)
 
-      rows
+      Result.new(rows, columns, types)
     end
   end
 end

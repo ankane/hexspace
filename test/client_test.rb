@@ -10,6 +10,11 @@ class ClientTest < Minitest::Test
     assert_equal expected, client.execute("SELECT * FROM users ORDER BY id")
 
     assert_equal 3, client.execute("SELECT COUNT(*) AS value FROM users").first["value"]
+
+    result = client.execute("SELECT * FROM users ORDER BY id", result_object: true)
+    assert_equal [[1, "Test 1"], [2, "Test 2"], [3, "Test 3"]], result.rows
+    assert_equal ["id", "name"], result.columns
+    assert_equal ["int", "string"], result.column_types
   end
 
   def test_show

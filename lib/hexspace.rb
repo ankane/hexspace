@@ -12,6 +12,7 @@ require_relative "hexspace/tcli_service"
 
 # modules
 require_relative "hexspace/client"
+require_relative "hexspace/result"
 require_relative "hexspace/sasl_transport"
 require_relative "hexspace/version"
 

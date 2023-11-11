@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Added `result_object` option
+
 ## 0.2.0 (2023-05-07)
 
 - Fixed error with Spark 3.4.0
