@@ -46,6 +46,24 @@ Supported modes are `:sasl`, `:nosasl`, `:http`, and `:https`. Please create an 
 
 The timeout is in seconds and only applies to `:sasl` and `:nosasl`.
 
+## Query Options
+
+Set a timeout
+
+```ruby
+client.execute(statement, timeout: 10)
+```
+
+Get a `Hexspace::Result` object instead of an array of hashes [unreleased]
+
+```ruby
+result = client.execute(statement, result_object: true)
+result.rows
+result.columns
+result.column_types
+result.to_a
+```
+
 ## Spark SQL Setup
 
 Download [Apache Spark](https://spark.apache.org/downloads.html) and start the [Thift server](https://spark.apache.org/docs/latest/sql-distributed-sql-engine.html).
