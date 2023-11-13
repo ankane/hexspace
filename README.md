@@ -54,7 +54,7 @@ Set a timeout
 client.execute(statement, timeout: 10)
 ```
 
-Get a `Hexspace::Result` object instead of an array of hashes [unreleased]
+Get a `Hexspace::Result` object instead of an array of hashes
 
 ```ruby
 result = client.execute(statement, result_object: true)

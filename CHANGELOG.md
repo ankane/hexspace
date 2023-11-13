@@ -1,4 +1,4 @@
-## 0.2.1 (unreleased)
+## 0.2.1 (2023-11-12)
 
 - Added `result_object` option
 
