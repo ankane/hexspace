@@ -2,7 +2,7 @@
 
 Ruby client for Apache Spark SQL and Apache Hive
 
-[![Build Status](https://github.com/ankane/hexspace/workflows/build/badge.svg?branch=master)](https://github.com/ankane/hexspace/actions)
+[![Build Status](https://github.com/ankane/hexspace/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/hexspace/actions)
 
 ## Installation
 
