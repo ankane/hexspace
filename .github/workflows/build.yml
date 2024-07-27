@@ -31,7 +31,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/spark
           key: spark-${{ env.SPARK_VERSION }}
@@ -68,7 +68,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/hadoop
           key: hadoop-${{ env.HADOOP_VERSION }}
@@ -80,7 +80,7 @@ jobs:
           tar xzf hadoop-$HADOOP_VERSION.tar.gz
           mv hadoop-$HADOOP_VERSION ~/hadoop
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/hive
           key: hive-${{ env.HIVE_VERSION }}-hadoop-${{ env.HADOOP_VERSION }}
