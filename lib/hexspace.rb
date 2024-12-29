@@ -1,8 +1,8 @@
 # dependencies
+require "bigdecimal"
 require "thrift"
 
 # stdlib
-require "bigdecimal"
 require "time"
 
 # thrift

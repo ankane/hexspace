@@ -7,6 +7,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - ruby: 3.4
+            hexspace_mode: sasl
+            beeline: -u jdbc:hive2://localhost:10000
           - ruby: 3.3
             hexspace_mode: sasl
             beeline: -u jdbc:hive2://localhost:10000

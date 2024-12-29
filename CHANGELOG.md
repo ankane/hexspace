@@ -1,3 +1,7 @@
+## 0.2.2 (unreleased)
+
+- Added support for Ruby 3.4
+
 ## 0.2.1 (2023-11-12)
 
 - Added `result_object` option
