@@ -11,16 +11,10 @@ jobs:
             hexspace_mode: sasl
             beeline: -u jdbc:hive2://localhost:10000
           - ruby: 3.3
-            hexspace_mode: sasl
-            beeline: -u jdbc:hive2://localhost:10000
-          - ruby: 3.2
-            hexspace_mode: sasl
-            beeline: -u jdbc:hive2://localhost:10000
-          - ruby: 3.1
             hexspace_mode: nosasl
             hiveconf: --hiveconf hive.server2.authentication=NOSASL
             beeline: -u "jdbc:hive2://localhost:10000/;auth=noSasl" -n anonymous
-          - ruby: "3.0"
+          - ruby: 3.2
             hexspace_mode: http
             hiveconf: --hiveconf hive.server2.transport.mode=http
             beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
