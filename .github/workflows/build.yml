@@ -8,19 +8,22 @@ jobs:
       matrix:
         include:
           - ruby: 3.4
+            spark: 4.0.0
             hexspace_mode: sasl
             beeline: -u jdbc:hive2://localhost:10000
           - ruby: 3.3
+            spark: 4.0.0
             hexspace_mode: nosasl
             hiveconf: --hiveconf hive.server2.authentication=NOSASL
             beeline: -u "jdbc:hive2://localhost:10000/;auth=noSasl" -n anonymous
           - ruby: 3.2
+            spark: 3.4.0
             hexspace_mode: http
             hiveconf: --hiveconf hive.server2.transport.mode=http
             beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
     env:
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
-      SPARK_VERSION: 3.4.0
+      SPARK_VERSION: ${{ matrix.spark }}
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
