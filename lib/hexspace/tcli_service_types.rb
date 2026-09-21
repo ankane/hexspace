@@ -18,8 +18,9 @@ module Hexspace
     HIVE_CLI_SERVICE_PROTOCOL_V8 = 7
     HIVE_CLI_SERVICE_PROTOCOL_V9 = 8
     HIVE_CLI_SERVICE_PROTOCOL_V10 = 9
-    VALUE_MAP = {0 => "HIVE_CLI_SERVICE_PROTOCOL_V1", 1 => "HIVE_CLI_SERVICE_PROTOCOL_V2", 2 => "HIVE_CLI_SERVICE_PROTOCOL_V3", 3 => "HIVE_CLI_SERVICE_PROTOCOL_V4", 4 => "HIVE_CLI_SERVICE_PROTOCOL_V5", 5 => "HIVE_CLI_SERVICE_PROTOCOL_V6", 6 => "HIVE_CLI_SERVICE_PROTOCOL_V7", 7 => "HIVE_CLI_SERVICE_PROTOCOL_V8", 8 => "HIVE_CLI_SERVICE_PROTOCOL_V9", 9 => "HIVE_CLI_SERVICE_PROTOCOL_V10"}
-    VALID_VALUES = Set.new([HIVE_CLI_SERVICE_PROTOCOL_V1, HIVE_CLI_SERVICE_PROTOCOL_V2, HIVE_CLI_SERVICE_PROTOCOL_V3, HIVE_CLI_SERVICE_PROTOCOL_V4, HIVE_CLI_SERVICE_PROTOCOL_V5, HIVE_CLI_SERVICE_PROTOCOL_V6, HIVE_CLI_SERVICE_PROTOCOL_V7, HIVE_CLI_SERVICE_PROTOCOL_V8, HIVE_CLI_SERVICE_PROTOCOL_V9, HIVE_CLI_SERVICE_PROTOCOL_V10]).freeze
+    HIVE_CLI_SERVICE_PROTOCOL_V11 = 10
+    VALUE_MAP = {0 => "HIVE_CLI_SERVICE_PROTOCOL_V1", 1 => "HIVE_CLI_SERVICE_PROTOCOL_V2", 2 => "HIVE_CLI_SERVICE_PROTOCOL_V3", 3 => "HIVE_CLI_SERVICE_PROTOCOL_V4", 4 => "HIVE_CLI_SERVICE_PROTOCOL_V5", 5 => "HIVE_CLI_SERVICE_PROTOCOL_V6", 6 => "HIVE_CLI_SERVICE_PROTOCOL_V7", 7 => "HIVE_CLI_SERVICE_PROTOCOL_V8", 8 => "HIVE_CLI_SERVICE_PROTOCOL_V9", 9 => "HIVE_CLI_SERVICE_PROTOCOL_V10", 10 => "HIVE_CLI_SERVICE_PROTOCOL_V11"}
+    VALID_VALUES = Set.new([HIVE_CLI_SERVICE_PROTOCOL_V1, HIVE_CLI_SERVICE_PROTOCOL_V2, HIVE_CLI_SERVICE_PROTOCOL_V3, HIVE_CLI_SERVICE_PROTOCOL_V4, HIVE_CLI_SERVICE_PROTOCOL_V5, HIVE_CLI_SERVICE_PROTOCOL_V6, HIVE_CLI_SERVICE_PROTOCOL_V7, HIVE_CLI_SERVICE_PROTOCOL_V8, HIVE_CLI_SERVICE_PROTOCOL_V9, HIVE_CLI_SERVICE_PROTOCOL_V10, HIVE_CLI_SERVICE_PROTOCOL_V11]).freeze
   end
 
   module TTypeId
@@ -45,8 +46,9 @@ module Hexspace
     CHAR_TYPE = 19
     INTERVAL_YEAR_MONTH_TYPE = 20
     INTERVAL_DAY_TIME_TYPE = 21
-    VALUE_MAP = {0 => "BOOLEAN_TYPE", 1 => "TINYINT_TYPE", 2 => "SMALLINT_TYPE", 3 => "INT_TYPE", 4 => "BIGINT_TYPE", 5 => "FLOAT_TYPE", 6 => "DOUBLE_TYPE", 7 => "STRING_TYPE", 8 => "TIMESTAMP_TYPE", 9 => "BINARY_TYPE", 10 => "ARRAY_TYPE", 11 => "MAP_TYPE", 12 => "STRUCT_TYPE", 13 => "UNION_TYPE", 14 => "USER_DEFINED_TYPE", 15 => "DECIMAL_TYPE", 16 => "NULL_TYPE", 17 => "DATE_TYPE", 18 => "VARCHAR_TYPE", 19 => "CHAR_TYPE", 20 => "INTERVAL_YEAR_MONTH_TYPE", 21 => "INTERVAL_DAY_TIME_TYPE"}
-    VALID_VALUES = Set.new([BOOLEAN_TYPE, TINYINT_TYPE, SMALLINT_TYPE, INT_TYPE, BIGINT_TYPE, FLOAT_TYPE, DOUBLE_TYPE, STRING_TYPE, TIMESTAMP_TYPE, BINARY_TYPE, ARRAY_TYPE, MAP_TYPE, STRUCT_TYPE, UNION_TYPE, USER_DEFINED_TYPE, DECIMAL_TYPE, NULL_TYPE, DATE_TYPE, VARCHAR_TYPE, CHAR_TYPE, INTERVAL_YEAR_MONTH_TYPE, INTERVAL_DAY_TIME_TYPE]).freeze
+    TIMESTAMPLOCALTZ_TYPE = 22
+    VALUE_MAP = {0 => "BOOLEAN_TYPE", 1 => "TINYINT_TYPE", 2 => "SMALLINT_TYPE", 3 => "INT_TYPE", 4 => "BIGINT_TYPE", 5 => "FLOAT_TYPE", 6 => "DOUBLE_TYPE", 7 => "STRING_TYPE", 8 => "TIMESTAMP_TYPE", 9 => "BINARY_TYPE", 10 => "ARRAY_TYPE", 11 => "MAP_TYPE", 12 => "STRUCT_TYPE", 13 => "UNION_TYPE", 14 => "USER_DEFINED_TYPE", 15 => "DECIMAL_TYPE", 16 => "NULL_TYPE", 17 => "DATE_TYPE", 18 => "VARCHAR_TYPE", 19 => "CHAR_TYPE", 20 => "INTERVAL_YEAR_MONTH_TYPE", 21 => "INTERVAL_DAY_TIME_TYPE", 22 => "TIMESTAMPLOCALTZ_TYPE"}
+    VALID_VALUES = Set.new([BOOLEAN_TYPE, TINYINT_TYPE, SMALLINT_TYPE, INT_TYPE, BIGINT_TYPE, FLOAT_TYPE, DOUBLE_TYPE, STRING_TYPE, TIMESTAMP_TYPE, BINARY_TYPE, ARRAY_TYPE, MAP_TYPE, STRUCT_TYPE, UNION_TYPE, USER_DEFINED_TYPE, DECIMAL_TYPE, NULL_TYPE, DATE_TYPE, VARCHAR_TYPE, CHAR_TYPE, INTERVAL_YEAR_MONTH_TYPE, INTERVAL_DAY_TIME_TYPE, TIMESTAMPLOCALTZ_TYPE]).freeze
   end
 
   module TStatusCode
@@ -83,8 +85,9 @@ module Hexspace
     GET_COLUMNS = 6
     GET_FUNCTIONS = 7
     UNKNOWN = 8
-    VALUE_MAP = {0 => "EXECUTE_STATEMENT", 1 => "GET_TYPE_INFO", 2 => "GET_CATALOGS", 3 => "GET_SCHEMAS", 4 => "GET_TABLES", 5 => "GET_TABLE_TYPES", 6 => "GET_COLUMNS", 7 => "GET_FUNCTIONS", 8 => "UNKNOWN"}
-    VALID_VALUES = Set.new([EXECUTE_STATEMENT, GET_TYPE_INFO, GET_CATALOGS, GET_SCHEMAS, GET_TABLES, GET_TABLE_TYPES, GET_COLUMNS, GET_FUNCTIONS, UNKNOWN]).freeze
+    PROCEDURAL_SQL = 9
+    VALUE_MAP = {0 => "EXECUTE_STATEMENT", 1 => "GET_TYPE_INFO", 2 => "GET_CATALOGS", 3 => "GET_SCHEMAS", 4 => "GET_TABLES", 5 => "GET_TABLE_TYPES", 6 => "GET_COLUMNS", 7 => "GET_FUNCTIONS", 8 => "UNKNOWN", 9 => "PROCEDURAL_SQL"}
+    VALID_VALUES = Set.new([EXECUTE_STATEMENT, GET_TYPE_INFO, GET_CATALOGS, GET_SCHEMAS, GET_TABLES, GET_TABLE_TYPES, GET_COLUMNS, GET_FUNCTIONS, UNKNOWN, PROCEDURAL_SQL]).freeze
   end
 
   module TGetInfoType
@@ -135,8 +138,9 @@ module Hexspace
     CLI_CATALOG_NAME = 10003
     CLI_COLLATION_SEQ = 10004
     CLI_MAX_IDENTIFIER_LEN = 10005
-    VALUE_MAP = {0 => "CLI_MAX_DRIVER_CONNECTIONS", 1 => "CLI_MAX_CONCURRENT_ACTIVITIES", 2 => "CLI_DATA_SOURCE_NAME", 8 => "CLI_FETCH_DIRECTION", 13 => "CLI_SERVER_NAME", 14 => "CLI_SEARCH_PATTERN_ESCAPE", 17 => "CLI_DBMS_NAME", 18 => "CLI_DBMS_VER", 19 => "CLI_ACCESSIBLE_TABLES", 20 => "CLI_ACCESSIBLE_PROCEDURES", 23 => "CLI_CURSOR_COMMIT_BEHAVIOR", 25 => "CLI_DATA_SOURCE_READ_ONLY", 26 => "CLI_DEFAULT_TXN_ISOLATION", 28 => "CLI_IDENTIFIER_CASE", 29 => "CLI_IDENTIFIER_QUOTE_CHAR", 30 => "CLI_MAX_COLUMN_NAME_LEN", 31 => "CLI_MAX_CURSOR_NAME_LEN", 32 => "CLI_MAX_SCHEMA_NAME_LEN", 34 => "CLI_MAX_CATALOG_NAME_LEN", 35 => "CLI_MAX_TABLE_NAME_LEN", 43 => "CLI_SCROLL_CONCURRENCY", 46 => "CLI_TXN_CAPABLE", 47 => "CLI_USER_NAME", 72 => "CLI_TXN_ISOLATION_OPTION", 73 => "CLI_INTEGRITY", 81 => "CLI_GETDATA_EXTENSIONS", 85 => "CLI_NULL_COLLATION", 86 => "CLI_ALTER_TABLE", 90 => "CLI_ORDER_BY_COLUMNS_IN_SELECT", 94 => "CLI_SPECIAL_CHARACTERS", 97 => "CLI_MAX_COLUMNS_IN_GROUP_BY", 98 => "CLI_MAX_COLUMNS_IN_INDEX", 99 => "CLI_MAX_COLUMNS_IN_ORDER_BY", 100 => "CLI_MAX_COLUMNS_IN_SELECT", 101 => "CLI_MAX_COLUMNS_IN_TABLE", 102 => "CLI_MAX_INDEX_SIZE", 104 => "CLI_MAX_ROW_SIZE", 105 => "CLI_MAX_STATEMENT_LEN", 106 => "CLI_MAX_TABLES_IN_SELECT", 107 => "CLI_MAX_USER_NAME_LEN", 115 => "CLI_OJ_CAPABILITIES", 10000 => "CLI_XOPEN_CLI_YEAR", 10001 => "CLI_CURSOR_SENSITIVITY", 10002 => "CLI_DESCRIBE_PARAMETER", 10003 => "CLI_CATALOG_NAME", 10004 => "CLI_COLLATION_SEQ", 10005 => "CLI_MAX_IDENTIFIER_LEN"}
-    VALID_VALUES = Set.new([CLI_MAX_DRIVER_CONNECTIONS, CLI_MAX_CONCURRENT_ACTIVITIES, CLI_DATA_SOURCE_NAME, CLI_FETCH_DIRECTION, CLI_SERVER_NAME, CLI_SEARCH_PATTERN_ESCAPE, CLI_DBMS_NAME, CLI_DBMS_VER, CLI_ACCESSIBLE_TABLES, CLI_ACCESSIBLE_PROCEDURES, CLI_CURSOR_COMMIT_BEHAVIOR, CLI_DATA_SOURCE_READ_ONLY, CLI_DEFAULT_TXN_ISOLATION, CLI_IDENTIFIER_CASE, CLI_IDENTIFIER_QUOTE_CHAR, CLI_MAX_COLUMN_NAME_LEN, CLI_MAX_CURSOR_NAME_LEN, CLI_MAX_SCHEMA_NAME_LEN, CLI_MAX_CATALOG_NAME_LEN, CLI_MAX_TABLE_NAME_LEN, CLI_SCROLL_CONCURRENCY, CLI_TXN_CAPABLE, CLI_USER_NAME, CLI_TXN_ISOLATION_OPTION, CLI_INTEGRITY, CLI_GETDATA_EXTENSIONS, CLI_NULL_COLLATION, CLI_ALTER_TABLE, CLI_ORDER_BY_COLUMNS_IN_SELECT, CLI_SPECIAL_CHARACTERS, CLI_MAX_COLUMNS_IN_GROUP_BY, CLI_MAX_COLUMNS_IN_INDEX, CLI_MAX_COLUMNS_IN_ORDER_BY, CLI_MAX_COLUMNS_IN_SELECT, CLI_MAX_COLUMNS_IN_TABLE, CLI_MAX_INDEX_SIZE, CLI_MAX_ROW_SIZE, CLI_MAX_STATEMENT_LEN, CLI_MAX_TABLES_IN_SELECT, CLI_MAX_USER_NAME_LEN, CLI_OJ_CAPABILITIES, CLI_XOPEN_CLI_YEAR, CLI_CURSOR_SENSITIVITY, CLI_DESCRIBE_PARAMETER, CLI_CATALOG_NAME, CLI_COLLATION_SEQ, CLI_MAX_IDENTIFIER_LEN]).freeze
+    CLI_ODBC_KEYWORDS = 10006
+    VALUE_MAP = {0 => "CLI_MAX_DRIVER_CONNECTIONS", 1 => "CLI_MAX_CONCURRENT_ACTIVITIES", 2 => "CLI_DATA_SOURCE_NAME", 8 => "CLI_FETCH_DIRECTION", 13 => "CLI_SERVER_NAME", 14 => "CLI_SEARCH_PATTERN_ESCAPE", 17 => "CLI_DBMS_NAME", 18 => "CLI_DBMS_VER", 19 => "CLI_ACCESSIBLE_TABLES", 20 => "CLI_ACCESSIBLE_PROCEDURES", 23 => "CLI_CURSOR_COMMIT_BEHAVIOR", 25 => "CLI_DATA_SOURCE_READ_ONLY", 26 => "CLI_DEFAULT_TXN_ISOLATION", 28 => "CLI_IDENTIFIER_CASE", 29 => "CLI_IDENTIFIER_QUOTE_CHAR", 30 => "CLI_MAX_COLUMN_NAME_LEN", 31 => "CLI_MAX_CURSOR_NAME_LEN", 32 => "CLI_MAX_SCHEMA_NAME_LEN", 34 => "CLI_MAX_CATALOG_NAME_LEN", 35 => "CLI_MAX_TABLE_NAME_LEN", 43 => "CLI_SCROLL_CONCURRENCY", 46 => "CLI_TXN_CAPABLE", 47 => "CLI_USER_NAME", 72 => "CLI_TXN_ISOLATION_OPTION", 73 => "CLI_INTEGRITY", 81 => "CLI_GETDATA_EXTENSIONS", 85 => "CLI_NULL_COLLATION", 86 => "CLI_ALTER_TABLE", 90 => "CLI_ORDER_BY_COLUMNS_IN_SELECT", 94 => "CLI_SPECIAL_CHARACTERS", 97 => "CLI_MAX_COLUMNS_IN_GROUP_BY", 98 => "CLI_MAX_COLUMNS_IN_INDEX", 99 => "CLI_MAX_COLUMNS_IN_ORDER_BY", 100 => "CLI_MAX_COLUMNS_IN_SELECT", 101 => "CLI_MAX_COLUMNS_IN_TABLE", 102 => "CLI_MAX_INDEX_SIZE", 104 => "CLI_MAX_ROW_SIZE", 105 => "CLI_MAX_STATEMENT_LEN", 106 => "CLI_MAX_TABLES_IN_SELECT", 107 => "CLI_MAX_USER_NAME_LEN", 115 => "CLI_OJ_CAPABILITIES", 10000 => "CLI_XOPEN_CLI_YEAR", 10001 => "CLI_CURSOR_SENSITIVITY", 10002 => "CLI_DESCRIBE_PARAMETER", 10003 => "CLI_CATALOG_NAME", 10004 => "CLI_COLLATION_SEQ", 10005 => "CLI_MAX_IDENTIFIER_LEN", 10006 => "CLI_ODBC_KEYWORDS"}
+    VALID_VALUES = Set.new([CLI_MAX_DRIVER_CONNECTIONS, CLI_MAX_CONCURRENT_ACTIVITIES, CLI_DATA_SOURCE_NAME, CLI_FETCH_DIRECTION, CLI_SERVER_NAME, CLI_SEARCH_PATTERN_ESCAPE, CLI_DBMS_NAME, CLI_DBMS_VER, CLI_ACCESSIBLE_TABLES, CLI_ACCESSIBLE_PROCEDURES, CLI_CURSOR_COMMIT_BEHAVIOR, CLI_DATA_SOURCE_READ_ONLY, CLI_DEFAULT_TXN_ISOLATION, CLI_IDENTIFIER_CASE, CLI_IDENTIFIER_QUOTE_CHAR, CLI_MAX_COLUMN_NAME_LEN, CLI_MAX_CURSOR_NAME_LEN, CLI_MAX_SCHEMA_NAME_LEN, CLI_MAX_CATALOG_NAME_LEN, CLI_MAX_TABLE_NAME_LEN, CLI_SCROLL_CONCURRENCY, CLI_TXN_CAPABLE, CLI_USER_NAME, CLI_TXN_ISOLATION_OPTION, CLI_INTEGRITY, CLI_GETDATA_EXTENSIONS, CLI_NULL_COLLATION, CLI_ALTER_TABLE, CLI_ORDER_BY_COLUMNS_IN_SELECT, CLI_SPECIAL_CHARACTERS, CLI_MAX_COLUMNS_IN_GROUP_BY, CLI_MAX_COLUMNS_IN_INDEX, CLI_MAX_COLUMNS_IN_ORDER_BY, CLI_MAX_COLUMNS_IN_SELECT, CLI_MAX_COLUMNS_IN_TABLE, CLI_MAX_INDEX_SIZE, CLI_MAX_ROW_SIZE, CLI_MAX_STATEMENT_LEN, CLI_MAX_TABLES_IN_SELECT, CLI_MAX_USER_NAME_LEN, CLI_OJ_CAPABILITIES, CLI_XOPEN_CLI_YEAR, CLI_CURSOR_SENSITIVITY, CLI_DESCRIBE_PARAMETER, CLI_CATALOG_NAME, CLI_COLLATION_SEQ, CLI_MAX_IDENTIFIER_LEN, CLI_ODBC_KEYWORDS]).freeze
   end
 
   module TFetchOrientation
@@ -232,6 +236,10 @@ module Hexspace
 
   class TOpenSessionResp; end
 
+  class TSetClientInfoReq; end
+
+  class TSetClientInfoResp; end
+
   class TCloseSessionReq; end
 
   class TCloseSessionResp; end
@@ -249,6 +257,14 @@ module Hexspace
   class TGetTypeInfoReq; end
 
   class TGetTypeInfoResp; end
+
+  class TUploadDataReq; end
+
+  class TUploadDataResp; end
+
+  class TDownloadDataReq; end
+
+  class TDownloadDataResp; end
 
   class TGetCatalogsReq; end
 
@@ -315,6 +331,10 @@ module Hexspace
   class TRenewDelegationTokenResp; end
 
   class TProgressUpdateResp; end
+
+  class TGetQueryIdReq; end
+
+  class TGetQueryIdResp; end
 
   class TTypeQualifierValue < ::Thrift::Union
     include ::Thrift::Struct_Union
@@ -1169,6 +1189,42 @@ module Hexspace
     ::Thrift::Struct.generate_accessors self
   end
 
+  class TSetClientInfoReq
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    SESSIONHANDLE_FIELD_ID = 1
+    CONFIGURATION_FIELD_ID = 2
+
+    FIELDS = {
+      SESSIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'sessionHandle', :class => ::Hexspace::TSessionHandle},
+      CONFIGURATION_FIELD_ID => {:type => ::Thrift::Types::MAP, :name => 'configuration', :key => {:type => ::Thrift::Types::STRING}, :value => {:type => ::Thrift::Types::STRING}, :optional => true}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field sessionHandle is unset!') unless @sessionHandle
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TSetClientInfoResp
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    STATUS_FIELD_ID = 1
+
+    FIELDS = {
+      STATUS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'status', :class => ::Hexspace::TStatus}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field status is unset!') unless @status
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
   class TCloseSessionReq
     include ::Thrift::Struct, ::Thrift::Struct_Union
     SESSIONHANDLE_FIELD_ID = 1
@@ -1375,6 +1431,95 @@ module Hexspace
 
     def validate
       raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field status is unset!') unless @status
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TUploadDataReq
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    SESSIONHANDLE_FIELD_ID = 1
+    TABLENAME_FIELD_ID = 2
+    PATH_FIELD_ID = 3
+    VALUES_FIELD_ID = 4
+
+    FIELDS = {
+      SESSIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'sessionHandle', :class => ::Hexspace::TSessionHandle},
+      TABLENAME_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'tableName', :optional => true},
+      PATH_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'path', :optional => true},
+      VALUES_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'values', :binary => true}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field sessionHandle is unset!') unless @sessionHandle
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field values is unset!') unless @values
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TUploadDataResp
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    STATUS_FIELD_ID = 1
+    OPERATIONHANDLE_FIELD_ID = 2
+
+    FIELDS = {
+      STATUS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'status', :class => ::Hexspace::TStatus},
+      OPERATIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'operationHandle', :class => ::Hexspace::TOperationHandle}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field status is unset!') unless @status
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field operationHandle is unset!') unless @operationHandle
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TDownloadDataReq
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    SESSIONHANDLE_FIELD_ID = 1
+    TABLENAME_FIELD_ID = 2
+    QUERY_FIELD_ID = 3
+    FORMAT_FIELD_ID = 4
+    DOWNLOADOPTIONS_FIELD_ID = 5
+
+    FIELDS = {
+      SESSIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'sessionHandle', :class => ::Hexspace::TSessionHandle},
+      TABLENAME_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'tableName', :optional => true},
+      QUERY_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'query', :optional => true},
+      FORMAT_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'format', :optional => true},
+      DOWNLOADOPTIONS_FIELD_ID => {:type => ::Thrift::Types::MAP, :name => 'downloadOptions', :key => {:type => ::Thrift::Types::STRING}, :value => {:type => ::Thrift::Types::STRING}, :optional => true}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field sessionHandle is unset!') unless @sessionHandle
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TDownloadDataResp
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    STATUS_FIELD_ID = 1
+    OPERATIONHANDLE_FIELD_ID = 2
+
+    FIELDS = {
+      STATUS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'status', :class => ::Hexspace::TStatus},
+      OPERATIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'operationHandle', :class => ::Hexspace::TOperationHandle}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field status is unset!') unless @status
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field operationHandle is unset!') unless @operationHandle
     end
 
     ::Thrift::Struct.generate_accessors self
@@ -1744,6 +1889,7 @@ module Hexspace
     OPERATIONCOMPLETED_FIELD_ID = 8
     HASRESULTSET_FIELD_ID = 9
     PROGRESSUPDATERESPONSE_FIELD_ID = 10
+    NUMMODIFIEDROWS_FIELD_ID = 11
 
     FIELDS = {
       STATUS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'status', :class => ::Hexspace::TStatus},
@@ -1755,7 +1901,8 @@ module Hexspace
       OPERATIONSTARTED_FIELD_ID => {:type => ::Thrift::Types::I64, :name => 'operationStarted', :optional => true},
       OPERATIONCOMPLETED_FIELD_ID => {:type => ::Thrift::Types::I64, :name => 'operationCompleted', :optional => true},
       HASRESULTSET_FIELD_ID => {:type => ::Thrift::Types::BOOL, :name => 'hasResultSet', :optional => true},
-      PROGRESSUPDATERESPONSE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'progressUpdateResponse', :class => ::Hexspace::TProgressUpdateResp, :optional => true}
+      PROGRESSUPDATERESPONSE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'progressUpdateResponse', :class => ::Hexspace::TProgressUpdateResp, :optional => true},
+      NUMMODIFIEDROWS_FIELD_ID => {:type => ::Thrift::Types::I64, :name => 'numModifiedRows', :optional => true}
     }
 
     def struct_fields; FIELDS; end
@@ -2069,6 +2216,40 @@ module Hexspace
       unless @status.nil? || ::Hexspace::TJobExecutionStatus::VALID_VALUES.include?(@status)
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Invalid value of field status!')
       end
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TGetQueryIdReq
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    OPERATIONHANDLE_FIELD_ID = 1
+
+    FIELDS = {
+      OPERATIONHANDLE_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'operationHandle', :class => ::Hexspace::TOperationHandle}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field operationHandle is unset!') unless @operationHandle
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class TGetQueryIdResp
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    QUERYID_FIELD_ID = 1
+
+    FIELDS = {
+      QUERYID_FIELD_ID => {:type => ::Thrift::Types::STRING, :name => 'queryId'}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+      raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::INVALID_DATA, 'Required field queryId is unset!') unless @queryId
     end
 
     ::Thrift::Struct.generate_accessors self

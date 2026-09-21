@@ -368,6 +368,74 @@ module Hexspace
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'RenewDelegationToken failed: unknown result')
       end
 
+      def GetQueryId(req)
+        send_GetQueryId(req)
+        return recv_GetQueryId()
+      end
+
+      def send_GetQueryId(req)
+        send_message('GetQueryId', GetQueryId_args, :req => req)
+      end
+
+      def recv_GetQueryId()
+        fname, mtype, rseqid = receive_message_begin()
+        validate_message_begin(fname, mtype, rseqid, 'GetQueryId')
+        result = receive_message(GetQueryId_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetQueryId failed: unknown result')
+      end
+
+      def SetClientInfo(req)
+        send_SetClientInfo(req)
+        return recv_SetClientInfo()
+      end
+
+      def send_SetClientInfo(req)
+        send_message('SetClientInfo', SetClientInfo_args, :req => req)
+      end
+
+      def recv_SetClientInfo()
+        fname, mtype, rseqid = receive_message_begin()
+        validate_message_begin(fname, mtype, rseqid, 'SetClientInfo')
+        result = receive_message(SetClientInfo_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetClientInfo failed: unknown result')
+      end
+
+      def UploadData(req)
+        send_UploadData(req)
+        return recv_UploadData()
+      end
+
+      def send_UploadData(req)
+        send_message('UploadData', UploadData_args, :req => req)
+      end
+
+      def recv_UploadData()
+        fname, mtype, rseqid = receive_message_begin()
+        validate_message_begin(fname, mtype, rseqid, 'UploadData')
+        result = receive_message(UploadData_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'UploadData failed: unknown result')
+      end
+
+      def DownloadData(req)
+        send_DownloadData(req)
+        return recv_DownloadData()
+      end
+
+      def send_DownloadData(req)
+        send_message('DownloadData', DownloadData_args, :req => req)
+      end
+
+      def recv_DownloadData()
+        fname, mtype, rseqid = receive_message_begin()
+        validate_message_begin(fname, mtype, rseqid, 'DownloadData')
+        result = receive_message(DownloadData_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'DownloadData failed: unknown result')
+      end
+
     end
 
     class Processor
@@ -518,6 +586,34 @@ module Hexspace
         result = RenewDelegationToken_result.new()
         result.success = @handler.RenewDelegationToken(args.req)
         write_result(result, oprot, 'RenewDelegationToken', seqid)
+      end
+
+      def process_GetQueryId(seqid, iprot, oprot)
+        args = read_args(iprot, GetQueryId_args)
+        result = GetQueryId_result.new()
+        result.success = @handler.GetQueryId(args.req)
+        write_result(result, oprot, 'GetQueryId', seqid)
+      end
+
+      def process_SetClientInfo(seqid, iprot, oprot)
+        args = read_args(iprot, SetClientInfo_args)
+        result = SetClientInfo_result.new()
+        result.success = @handler.SetClientInfo(args.req)
+        write_result(result, oprot, 'SetClientInfo', seqid)
+      end
+
+      def process_UploadData(seqid, iprot, oprot)
+        args = read_args(iprot, UploadData_args)
+        result = UploadData_result.new()
+        result.success = @handler.UploadData(args.req)
+        write_result(result, oprot, 'UploadData', seqid)
+      end
+
+      def process_DownloadData(seqid, iprot, oprot)
+        args = read_args(iprot, DownloadData_args)
+        result = DownloadData_result.new()
+        result.success = @handler.DownloadData(args.req)
+        write_result(result, oprot, 'DownloadData', seqid)
       end
 
     end
@@ -1186,6 +1282,134 @@ module Hexspace
 
       FIELDS = {
         SUCCESS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Hexspace::TRenewDelegationTokenResp}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetQueryId_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ_FIELD_ID = 1
+
+      FIELDS = {
+        REQ_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Hexspace::TGetQueryIdReq}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetQueryId_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS_FIELD_ID = 0
+
+      FIELDS = {
+        SUCCESS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Hexspace::TGetQueryIdResp}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class SetClientInfo_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ_FIELD_ID = 1
+
+      FIELDS = {
+        REQ_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Hexspace::TSetClientInfoReq}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class SetClientInfo_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS_FIELD_ID = 0
+
+      FIELDS = {
+        SUCCESS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Hexspace::TSetClientInfoResp}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class UploadData_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ_FIELD_ID = 1
+
+      FIELDS = {
+        REQ_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Hexspace::TUploadDataReq}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class UploadData_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS_FIELD_ID = 0
+
+      FIELDS = {
+        SUCCESS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Hexspace::TUploadDataResp}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class DownloadData_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ_FIELD_ID = 1
+
+      FIELDS = {
+        REQ_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Hexspace::TDownloadDataReq}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class DownloadData_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS_FIELD_ID = 0
+
+      FIELDS = {
+        SUCCESS_FIELD_ID => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Hexspace::TDownloadDataResp}
       }
 
       def struct_fields; FIELDS; end
