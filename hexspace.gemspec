@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 3.2"
 
   spec.add_dependency "bigdecimal"
-  spec.add_dependency "thrift", ">= 0.18"
+  spec.add_dependency "thrift", ">= 0.24"
 end
