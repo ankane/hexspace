@@ -8,16 +8,16 @@ jobs:
       matrix:
         include:
           - ruby: "4.0"
-            spark: 4.0.0
+            spark: 4.2.0
             hexspace_mode: sasl
             beeline: -u jdbc:hive2://localhost:10000
           - ruby: 3.4
-            spark: 4.0.0
+            spark: 4.0.4
             hexspace_mode: nosasl
             hiveconf: --hiveconf hive.server2.authentication=NOSASL
             beeline: -u "jdbc:hive2://localhost:10000/;auth=noSasl" -n anonymous
           - ruby: 3.3
-            spark: 3.4.0
+            spark: 3.5.9
             hexspace_mode: http
             hiveconf: --hiveconf hive.server2.transport.mode=http
             beeline: -u "jdbc:hive2://localhost:10001/?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice"
@@ -25,13 +25,13 @@ jobs:
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
       SPARK_VERSION: ${{ matrix.spark }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: ~/spark
           key: spark-${{ env.SPARK_VERSION }}
@@ -58,17 +58,17 @@ jobs:
             beeline: -u jdbc:hive2://localhost:10000
     env:
       HADOOP_HEAPSIZE: 2048
-      HADOOP_VERSION: 3.4.1
+      HADOOP_VERSION: 3.5.0
       HEXSPACE_MODE: ${{ matrix.hexspace_mode }}
-      HIVE_VERSION: 4.0.1
+      HIVE_VERSION: 4.2.1
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: ~/hadoop
           key: hadoop-${{ env.HADOOP_VERSION }}
@@ -80,7 +80,7 @@ jobs:
           tar xzf hadoop-$HADOOP_VERSION.tar.gz
           mv hadoop-$HADOOP_VERSION ~/hadoop
 
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: ~/hive
           key: hive-${{ env.HIVE_VERSION }}-hadoop-${{ env.HADOOP_VERSION }}
