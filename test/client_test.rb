@@ -31,6 +31,6 @@ class ClientTest < Minitest::Test
     error = assert_raises(Thrift::TransportException) do
       Hexspace::Client.new(host: "10.255.255.1", timeout: 0.1)
     end
-    assert_equal "Could not connect to 10.255.255.1:10000: ", error.message
+    assert_equal "Socket: Timed out opening connection to 10.255.255.1:10000", error.message
   end
 end

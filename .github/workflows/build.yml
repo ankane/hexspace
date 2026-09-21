@@ -97,11 +97,11 @@ jobs:
           ln -s ~/hadoop/share/hadoop/common/lib/guava-27.0-jre.jar ~/hive/lib
 
       - run: echo "$HOME/hadoop/bin" >> $GITHUB_PATH
-      - run: ~/hive/bin/schematool -dbType derby -initSchema
-      - run: |
-          mkdir /tmp/warehouse
-          ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse &
-          sleep 120
+      # - run: ~/hive/bin/schematool -dbType derby -initSchema
+      # - run: |
+      #     mkdir /tmp/warehouse
+      #     ~/hive/bin/hiveserver2 --hiveconf hive.metastore.warehouse.dir=/tmp/warehouse &
+      #     sleep 120
       # TODO figure out why beeline cannot connect on CI
       # - run: ~/hive/bin/beeline ${{ matrix.beeline }} -e 'CREATE DATABASE hexspace_test;'
       # - run: bundle exec rake test
