@@ -33,7 +33,7 @@ class TypesTest < Minitest::Test
   def test_float
     assert_type 1.5, "SELECT CAST(1.5 AS float)"
     assert_type Float::INFINITY, "SELECT float('Infinity')"
-    assert_type -Float::INFINITY, "SELECT float('-Infinity')"
+    assert_type (-Float::INFINITY), "SELECT float('-Infinity')"
     assert_type Float::NAN, "SELECT float('NaN')"
   end
 

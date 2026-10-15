@@ -107,7 +107,6 @@ module Hexspace
 
         # columns can be nil with Spark 3.4+
         result.results.columns&.each_with_index do |col, j|
-          name = columns[j]
           value = col.get_value
 
           if j == 0
