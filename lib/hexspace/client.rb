@@ -25,7 +25,7 @@ module Hexspace
           uri = uri_class.build(host: host, port: port || 10001, path: "/cliservice")
 
           t = Thrift::HTTPClientTransport.new(uri)
-          t.add_headers({"Authorization" => "Basic #{Base64.strict_encode64("#{username}:#{password}")}"})
+          t.add_headers({"Authorization" => "Basic #{["#{username}:#{password}"].pack("m0")}"})
           t
         else
           raise ArgumentError, "Invalid mode: #{mode}"
