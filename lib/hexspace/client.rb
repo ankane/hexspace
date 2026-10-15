@@ -48,7 +48,7 @@ module Hexspace
       ObjectSpace.define_finalizer(self, self.class.finalize(@transport, @client, @session))
     end
 
-    def execute(statement, timeout: nil, result_object: false)
+    def execute(statement, timeout: nil, result_object: true)
       result = execute_statement(statement, timeout: timeout)
       if result.operationHandle.hasResultSet
         result = process_result(result)

@@ -7,11 +7,12 @@ class ClientTest < Minitest::Test
     client.execute("INSERT INTO users VALUES (1, 'Test 1'), (2, 'Test 2'), (3, 'Test 3')")
 
     expected = 1.upto(3).map { |i| {"id" => i, "name" => "Test #{i}"} }
-    assert_equal expected, client.execute("SELECT * FROM users ORDER BY id")
+    assert_equal expected, client.execute("SELECT * FROM users ORDER BY id", result_object: false)
 
     assert_equal 3, client.execute("SELECT COUNT(*) AS value FROM users").first["value"]
 
-    result = client.execute("SELECT * FROM users ORDER BY id", result_object: true)
+    result = client.execute("SELECT * FROM users ORDER BY id")
+
     assert_equal [[1, "Test 1"], [2, "Test 2"], [3, "Test 3"]], result.rows
     assert_equal ["id", "name"], result.columns
     assert_equal ["int", "string"], result.column_types

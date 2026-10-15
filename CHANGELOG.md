@@ -1,5 +1,6 @@
 ## 0.4.0 (unreleased)
 
+- Changed `execute` method to return `Result` object by default
 - Dropped support for Ruby < 3.3
 
 ## 0.3.0 (2025-04-03)

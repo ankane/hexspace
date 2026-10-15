@@ -23,7 +23,11 @@ client = Hexspace::Client.new
 Execute queries
 
 ```ruby
-client.execute("SELECT COUNT(*) FROM users")
+result = client.execute("SELECT COUNT(*) FROM users")
+result.rows
+result.columns
+result.column_types
+result.to_a
 ```
 
 ## Connection Options
@@ -52,16 +56,6 @@ Set a timeout
 
 ```ruby
 client.execute(statement, timeout: 10)
-```
-
-Get a `Hexspace::Result` object instead of an array of hashes
-
-```ruby
-result = client.execute(statement, result_object: true)
-result.rows
-result.columns
-result.column_types
-result.to_a
 ```
 
 ## Spark SQL Setup

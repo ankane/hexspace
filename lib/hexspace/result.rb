@@ -1,5 +1,7 @@
 module Hexspace
   class Result
+    include Enumerable
+
     attr_reader :rows, :columns, :column_types
 
     def initialize(rows, columns, column_types)
@@ -8,9 +10,9 @@ module Hexspace
       @column_types = column_types
     end
 
-    def to_a
-      @rows.map do |row|
-        @columns.zip(row).to_h
+    def each
+      @rows.each do |row|
+        yield @columns.zip(row).to_h
       end
     end
   end
