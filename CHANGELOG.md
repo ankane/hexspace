@@ -1,4 +1,4 @@
-## 0.4.0 (unreleased)
+## 0.4.0 (2026-10-14)
 
 - Changed `execute` method to return `Result` object by default
 - Dropped support for Ruby < 3.3
